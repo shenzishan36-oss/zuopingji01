@@ -6,7 +6,13 @@ export default function SmartImage({ src, alt, label, className = "" }) {
   return (
     <div className={`media-frame ${className}`}>
       {!failed && src ? (
-        <img src={src} alt={alt} onError={() => setFailed(true)} />
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
       ) : (
         <div className="image-placeholder" aria-label={alt}>
           {label || alt}

@@ -297,7 +297,7 @@ export default function KuroProjectPage({ project }) {
             {expressionMoods.map((mood) => (
               <figure className={`kuro-emotion kuro-emotion--${mood.key}`} key={mood.key}>
                 <div className="kuro-emotion__crop">
-                  <img src={image("08-kuro-emotions-transparent.png")} alt={`${mood.label} KURO 表情`} />
+                  <img src={image("08-kuro-emotions-transparent.png")} alt={`${mood.label} KURO 表情`} loading="lazy" decoding="async" />
                 </div>
                 <figcaption>
                   <span>{mood.label}</span>
@@ -330,14 +330,14 @@ export default function KuroProjectPage({ project }) {
           </div>
           <div className="kuro-motion-stage" aria-label="KURO 动作系统">
             <figure className="kuro-motion-main kuro-motion-main--action">
-              <img src={image("09-kuro-action-system.webp")} alt="KURO 动作系统展示" />
+              <img src={image("09-kuro-action-system.webp")} alt="KURO 动作系统展示" loading="lazy" decoding="async" />
               <figcaption>
                 <span>Action Library</span>
                 动作系统
               </figcaption>
             </figure>
             <figure className="kuro-motion-main kuro-motion-main--expression">
-              <img src={image("07-kuro-expression-system.webp")} alt="KURO 表情系统展示" />
+              <img src={image("07-kuro-expression-system.webp")} alt="KURO 表情系统展示" loading="lazy" decoding="async" />
               <figcaption>
                 <span>Expression System</span>
                 表情系统
@@ -364,7 +364,7 @@ export default function KuroProjectPage({ project }) {
           </div>
           <div className="kuro-world-board">
             <figure className="kuro-world-main">
-              <img src={image("33-kuro-cafe-storefront.png")} alt="KURO 咖啡店夜晚外立面主视觉" />
+              <img src={image("33-kuro-cafe-storefront.png")} alt="KURO 咖啡店夜晚外立面主视觉" loading="lazy" decoding="async" />
               <figcaption>
                 <span>03</span>
                 <strong>NIGHT SHIFT</strong>
@@ -404,10 +404,10 @@ export default function KuroProjectPage({ project }) {
           </div>
           <div className="kuro-brand-board">
             <figure className="kuro-brand-board__showcase">
-              <img src={image("26-kuro-final-showcase.webp")} alt="KURO 周边延展最终展示" />
+              <img src={image("26-kuro-final-showcase.webp")} alt="KURO 周边延展最终展示" loading="lazy" decoding="async" />
             </figure>
             <figure className="kuro-brand-board__packaging">
-              <img src={image("19-kuro-packaging-system.webp")} alt="KURO 咖啡包装与基础延展系统" />
+              <img src={image("19-kuro-packaging-system.webp")} alt="KURO 咖啡包装与基础延展系统" loading="lazy" decoding="async" />
             </figure>
           </div>
         </div>
@@ -416,7 +416,7 @@ export default function KuroProjectPage({ project }) {
       <section className="kuro-plate kuro-merch-system" aria-label="08 Merchandise System">
         <div className="kuro-plate__grid">
           <figure className="kuro-merch-feature">
-            <img src={image("05-kuro-feature-description.webp")} alt="KURO 角色特征说明" />
+            <img src={image("05-kuro-feature-description.webp")} alt="KURO 角色特征说明" loading="lazy" decoding="async" />
           </figure>
         </div>
       </section>
@@ -428,7 +428,7 @@ export default function KuroProjectPage({ project }) {
             <small>STORYBOARD</small>
           </div>
           <figure className="kuro-storyboard-page__image">
-            <img src={image("16-kuro-storyboard.webp")} alt="KURO 咖啡日常故事板" />
+            <img src={image("16-kuro-storyboard.webp")} alt="KURO 咖啡日常故事板" loading="lazy" decoding="async" />
           </figure>
         </div>
       </section>
@@ -455,7 +455,7 @@ export default function KuroProjectPage({ project }) {
       <section className="kuro-plate kuro-digital-content" aria-label="11 Digital Content">
         <div className="kuro-plate__grid">
           <figure className="kuro-digital-sticker-sheet">
-            <img src={image("21-kuro-sticker-sheet.webp")} alt="KURO sticker club 贴纸系统" />
+            <img src={image("21-kuro-sticker-sheet.webp")} alt="KURO sticker club 贴纸系统" loading="lazy" decoding="async" />
           </figure>
           <figure className="kuro-digital-sticker-video" aria-label="KURO 数字贴纸动态展示">
             <video
@@ -492,7 +492,7 @@ export default function KuroProjectPage({ project }) {
       <section className="kuro-plate kuro-final-showcase-system" aria-label="13 Final Showcase">
         <div className="kuro-plate__grid">
           <figure className="kuro-final-thank-you">
-            <img src={image("40-kuro-thank-you.png")} alt="KURO Coffee thank you 最终展示页" />
+            <img src={image("40-kuro-thank-you.png")} alt="KURO Coffee thank you 最终展示页" loading="lazy" decoding="async" />
           </figure>
         </div>
       </section>

@@ -44,7 +44,7 @@ export default function HomePage() {
           <div className="basic-hero__content">
             <p>AI Product Designer / AIGC Designer / UX UI</p>
             <div className="basic-hero__video" aria-label="SHEN 作品集动态标识视频">
-              <video autoPlay loop muted playsInline preload="auto">
+              <video autoPlay loop muted playsInline preload="metadata">
                 <source src="/videos/home/portfolio-logo-animation.mp4" type="video/mp4" />
               </video>
             </div>
@@ -69,7 +69,7 @@ export default function HomePage() {
       <section className="basic-section basic-profile" id="profile">
         <div className="basic-home__container basic-profile__grid">
           <div className="basic-profile__portrait" aria-label="个人形象占位">
-            <img src="/images/profile/shen-profile.jpg" alt="沈梓钐个人照片" />
+            <img src="/images/profile/shen-profile.jpg" alt="沈梓钐个人照片" loading="lazy" decoding="async" />
           </div>
           <div className="basic-profile__copy">
             <p className="basic-label">About / Positioning</p>
@@ -83,7 +83,7 @@ export default function HomePage() {
               <span className="hover-card hover-card--qr">
                 <button className="button-link" type="button">微信</button>
                 <span className="hover-card__panel" role="presentation">
-                  <img src="/images/contact/wechat-qr.jpg" alt="微信二维码" />
+                  <img src="/images/contact/wechat-qr.jpg" alt="微信二维码" loading="lazy" decoding="async" />
                 </span>
               </span>
               <span>AI 产品设计 / UX UI / Product Design / AIGC Workflow</span>
@@ -112,6 +112,8 @@ export default function HomePage() {
                 <img
                   src={homeProjectImages[project.slug] || project.coverImage}
                   alt={`${project.title} 项目封面`}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <span>{project.projectNumber} / {project.year}</span>

@@ -6,6 +6,7 @@ const jiyePages = Array.from({ length: 18 }, (_, index) => {
   return {
     number: pageNumber,
     src: `/images/jiye/sequence/${pageNumber}.png`,
+    mobileSrc: `/images/jiye/sequence-mobile/${pageNumber}.webp`,
   };
 });
 
@@ -51,12 +52,15 @@ export default function JiyeProjectPage({ project }) {
       <div className="jiye-sequence">
         {jiyePages.map((page) => (
           <figure className="jiye-sequence__item" key={page.number}>
-            <img
-              src={page.src}
-              alt={`JIYE project page ${page.number}`}
-              loading={page.number <= 2 ? "eager" : "lazy"}
-              decoding="async"
-            />
+            <picture>
+              <source media="(max-width: 768px)" srcSet={page.mobileSrc} type="image/webp" />
+              <img
+                src={page.src}
+                alt={`JIYE project page ${page.number}`}
+                loading={page.number <= 2 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </picture>
           </figure>
         ))}
       </div>

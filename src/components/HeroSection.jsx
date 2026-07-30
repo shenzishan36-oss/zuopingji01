@@ -11,6 +11,7 @@ export default function HeroSection() {
           muted
           loop
           playsInline
+          preload="metadata"
         />
         <div className="home-hero__veil" />
       </div>

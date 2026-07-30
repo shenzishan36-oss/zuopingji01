@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
+    "assets:mobile": "node scripts/generate-mobile-assets.mjs",
     "build": "vite build && node scripts/create-static-routes.mjs",
     "build:cloudflare": "vite build && node scripts/create-static-routes.mjs && node scripts/prepare-cloudflare-dist.mjs",
     "preview": "vite preview --host 0.0.0.0"
@@ -17,5 +18,8 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.1",
     "vite": "^6.0.7"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3"
   }
 }
