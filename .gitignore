@@ -1,0 +1,16 @@
+node_modules/
+.pnpm-store/
+dist/
+.checks/
+.codex-screenshots/
+undefined/
+
+artifacts-*.png
+
+.DS_Store
+Thumbs.db
+*.log
+*.local
+.env
+.env.*
+!.env.example

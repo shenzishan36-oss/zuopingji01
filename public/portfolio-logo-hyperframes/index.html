@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Logo Reveal</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #000;
+      }
+
+      #portfolio-logo-reveal-root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+        color: #f6f1ea;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .scene-content {
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 150px 150px 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .paper-field {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background:
+          radial-gradient(circle at 50% 56%, rgba(255, 246, 232, 0.10), transparent 28%),
+          #000;
+      }
+
+      .dust {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(246, 241, 234, 0.42);
+        filter: blur(1px);
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .logo-stage {
+        position: relative;
+        width: min(78vw, 1371px);
+        aspect-ratio: 1371 / 281;
+        filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.72));
+        perspective: 900px;
+        transform-style: preserve-3d;
+      }
+
+      .slice {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        background-image: url("./assets/portfolio-logo-cutout.png");
+        background-repeat: no-repeat;
+        background-size: 1371px 281px;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity, filter;
+        opacity: 1;
+      }
+
+      .shadow-slice {
+        position: absolute;
+        top: 9%;
+        height: 86%;
+        background: rgba(255, 255, 255, 0.10);
+        filter: blur(9px);
+        mix-blend-mode: screen;
+        opacity: 0;
+        transform-origin: 50% 50%;
+      }
+
+      .flash {
+        position: absolute;
+        left: 16%;
+        right: 16%;
+        top: 50%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(246, 241, 234, 0.9), transparent);
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .wipe {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 70px;
+        height: 70px;
+        margin-left: -35px;
+        margin-top: -35px;
+        border-radius: 999px;
+        background: #f6f1ea;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .final-logo {
+        position: absolute;
+        inset: 0;
+        background-image: url("./assets/portfolio-logo-cutout.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        opacity: 0;
+        will-change: transform, opacity, filter;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="portfolio-logo-reveal-root"
+      data-composition-id="portfolio-logo-reveal"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="5.5"
+    >
+      <div class="paper-field" data-layout-ignore></div>
+      <div class="scene-content">
+        <div class="logo-stage" data-layout-allow-overflow>
+          <div class="final-logo"></div>
+          <div class="flash"></div>
+        </div>
+      </div>
+      <div class="wipe" data-layout-ignore></div>
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+
+        const comp = document.querySelector('[data-composition-id="portfolio-logo-reveal"]');
+        const stage = comp.querySelector(".logo-stage");
+        const sliceCount = 28;
+        const sourceW = 1371;
+        const sourceH = 281;
+        const stageW = 1371;
+        const stageH = 281;
+
+        for (let i = 0; i < 42; i += 1) {
+          const dust = document.createElement("i");
+          dust.className = "dust";
+          dust.style.left = `${240 + ((i * 137) % 1440)}px`;
+          dust.style.top = `${280 + ((i * 83) % 460)}px`;
+          comp.appendChild(dust);
+        }
+
+        for (let i = 0; i < sliceCount; i += 1) {
+          const x = Math.round((sourceW / sliceCount) * i);
+          const nextX = Math.round((sourceW / sliceCount) * (i + 1));
+          const width = nextX - x + 1;
+          const slice = document.createElement("div");
+          slice.className = "slice";
+          slice.style.left = `${(x / sourceW) * 100}%`;
+          slice.style.width = `${(width / sourceW) * 100}%`;
+          slice.style.backgroundPosition = `-${x}px 0`;
+          slice.dataset.i = String(i);
+          stage.appendChild(slice);
+
+          const shadow = document.createElement("div");
+          shadow.className = "shadow-slice";
+          shadow.style.left = slice.style.left;
+          shadow.style.width = slice.style.width;
+          stage.insertBefore(shadow, slice);
+        }
+
+        const tl = gsap.timeline({
+          paused: true,
+          defaults: { duration: 0.68, ease: "expo.out" },
+        });
+
+        tl.fromTo(".paper-field", { opacity: 0 }, { opacity: 1, duration: 0.22, ease: "power1.out" }, 0.05);
+        tl.from(".slice", { opacity: 0, scale: 0.98, duration: 0.24, ease: "sine.out" }, 0.1);
+        tl.to(
+          ".slice",
+          {
+            opacity: 0,
+            x: (i) => 130 + (i % 2 === 0 ? i * 18 : -i * 8),
+            y: (i) => -170 + ((i * 71) % 420),
+            z: (i) => -180 + (i % 6) * 65,
+            rotation: (i) => -42 + ((i * 37) % 92),
+            rotationY: (i) => (i % 2 === 0 ? 72 : -58),
+            scale: (i) => 0.42 + (i % 5) * 0.055,
+            filter: "blur(5px)",
+            stagger: { each: 0.018, from: "end" },
+            duration: 0.58,
+            ease: "power3.in",
+          },
+          0.5,
+        );
+        tl.fromTo(
+          ".shadow-slice",
+          {
+            opacity: 0.34,
+            x: 0,
+            y: 0,
+            scaleY: 1,
+            rotation: 0,
+          },
+          {
+            opacity: 0,
+            x: (i) => 220 - ((i * 17) % 430),
+            y: (i) => -110 + ((i * 31) % 260),
+            scaleY: 0.24,
+            rotation: (i) => -20 + ((i * 19) % 40),
+            stagger: { each: 0.012, from: "end" },
+            duration: 0.5,
+            ease: "circ.in",
+          },
+          0.58,
+        );
+        tl.to(
+          ".dust",
+          {
+            opacity: 0.32,
+            scale: 1.5,
+            x: (i) => -150 + ((i * 47) % 300),
+            y: (i) => -80 + ((i * 37) % 160),
+            duration: 0.22,
+            stagger: { each: 0.004, from: "end" },
+            ease: "power2.out",
+          },
+          0.72,
+        );
+        tl.to(".dust", { opacity: 0, scale: 0.2, duration: 0.45, ease: "sine.out" }, 1.0);
+        tl.fromTo(
+          ".wipe",
+          { opacity: 0, scale: 0.08 },
+          { opacity: 1, scale: 30, duration: 0.22, ease: "expo.in" },
+          1.42,
+        );
+        tl.to(".wipe", { opacity: 0, scale: 34, duration: 0.24, ease: "power2.out" }, 1.66);
+        tl.fromTo(
+          ".flash",
+          { opacity: 0, scaleX: 0.08, x: -120 },
+          { opacity: 0.92, scaleX: 1, x: 0, duration: 0.22, ease: "power4.out" },
+          2.0,
+        );
+        tl.to(".flash", { opacity: 0, scaleX: 0.34, duration: 0.35, ease: "sine.out" }, 2.22);
+        tl.fromTo(
+          ".slice",
+          {
+            opacity: 0,
+            x: (i) => (i % 2 === 0 ? -560 - i * 7 : 540 + i * 8),
+            y: (i) => 260 - ((i * 53) % 520),
+            z: (i) => -260 + (i % 5) * 80,
+            rotation: (i) => -32 + ((i * 31) % 76),
+            rotationY: (i) => (i % 2 === 0 ? -66 : 66),
+            scale: (i) => 0.7 + (i % 4) * 0.04,
+            filter: "blur(6px)",
+          },
+          {
+            immediateRender: false,
+            opacity: 1,
+            x: (i) => (i % 3 === 0 ? -7 : i % 3 === 1 ? 8 : -3),
+            y: (i) => (i % 4 === 0 ? -6 : i % 4 === 1 ? 5 : 0),
+            z: 0,
+            rotation: (i) => (i % 2 === 0 ? -1.8 : 1.4),
+            rotationY: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.72,
+            stagger: { each: 0.016, from: "edges" },
+            ease: "back.out(1.9)",
+          },
+          2.18,
+        );
+        tl.to(
+          ".slice",
+          {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            duration: 0.34,
+            stagger: { each: 0.006, from: "center" },
+            ease: "elastic.out(1, 0.42)",
+          },
+          2.98,
+        );
+        tl.to(
+          ".slice",
+          {
+            x: (i) => (i % 2 === 0 ? 1.5 : -1.5),
+            y: (i) => (i % 3 === 0 ? -1.2 : 1.2),
+            rotation: (i) => (i % 2 === 0 ? 0.35 : -0.35),
+            duration: 0.08,
+            repeat: 5,
+            yoyo: true,
+            stagger: { each: 0.003, from: "edges" },
+            ease: "none",
+          },
+          3.56,
+        );
+        tl.to(".final-logo", { opacity: 1, duration: 0.18, ease: "power1.out" }, 4.05);
+        tl.to(".slice", { opacity: 0, duration: 0.12, ease: "power1.out" }, 4.08);
+        tl.to(".final-logo", { scale: 1.012, duration: 0.34, ease: "sine.inOut" }, 4.12);
+        tl.to(".final-logo", { scale: 1, duration: 0.4, ease: "sine.out" }, 4.46);
+        tl.to(".final-logo", { opacity: 0, scale: 0.985, duration: 0.45, ease: "power2.in" }, 5.0);
+
+        window.__timelines["portfolio-logo-reveal"] = tl;
+      </script>
+    </div>
+  </body>
+</html>

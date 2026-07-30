@@ -1,0 +1,248 @@
+/* =========================================================
+   Responsive tuning layer
+   Breakpoints:
+   - Mobile: < 768px
+   - Tablet: 768px - 1024px
+   - Desktop: > 1024px
+   This file is intentionally loaded after global.css.
+   ========================================================= */
+
+:root {
+  --responsive-page-pad: 64px;
+  --responsive-body-size: clamp(14px, 2vw, 18px);
+  --responsive-title-size: clamp(20px, 4vw, 36px);
+  --responsive-gap: 32px;
+}
+
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-size: var(--responsive-body-size);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+.container,
+.basic-home__container,
+.profile-page__container,
+.workflow-page__container {
+  box-sizing: border-box;
+}
+
+.page-title,
+.basic-section__head h2,
+.basic-profile__copy h2,
+.basic-contact h2,
+.profile-page__hero h1,
+.workflow-page__hero h1,
+.resume-page__hero h1,
+.project-card__title,
+.miiro-section h2,
+.jiye-brief__heading h1,
+.kuro-plate h1,
+.kuro-plate h2 {
+  font-size: var(--responsive-title-size);
+}
+
+p,
+li,
+dd,
+dt,
+.section-intro,
+.nav-link,
+.button-link,
+.basic-project-card p,
+.basic-project-card small,
+.basic-strengths__grid p,
+.workflow-page__flow p,
+.profile-page__statement p,
+.resume-page__highlights li {
+  font-size: var(--responsive-body-size);
+}
+
+/* ===== Desktop: > 1024px ===== */
+@media (min-width: 1025px) {
+  :root {
+    --responsive-page-pad: 64px;
+    --responsive-gap: 32px;
+    --page-x: 64px;
+  }
+
+  .container,
+  .basic-home__container,
+  .profile-page__container,
+  .workflow-page__container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .basic-profile__grid,
+  .basic-projects__grid,
+  .basic-strengths__grid,
+  .project-card,
+  .page-project-list,
+  .profile-page__timeline,
+  .resume-page__path,
+  .workflow-page__flow,
+  .miiro-hero__grid,
+  .miiro-section__grid,
+  .miiro-final__grid,
+  .jiye-brief__grid,
+  .jiye-brief__facts {
+    gap: var(--responsive-gap);
+  }
+}
+
+/* ===== Tablet: 768px - 1024px ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  :root {
+    --responsive-page-pad: 32px;
+    --responsive-gap: 16px;
+    --page-x: 32px;
+  }
+
+  .container,
+  .basic-home__container,
+  .profile-page__container,
+  .workflow-page__container {
+    width: min(100% - 64px, var(--max));
+  }
+
+  .site-nav {
+    padding-right: var(--responsive-page-pad);
+    padding-left: var(--responsive-page-pad);
+  }
+
+  .basic-profile__grid,
+  .basic-projects__grid,
+  .basic-strengths__grid,
+  .project-list,
+  .page-project-list,
+  .profile-page__timeline,
+  .resume-page__path,
+  .workflow-page__flow,
+  .jiye-brief__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--responsive-gap);
+  }
+
+  .miiro-hero__grid,
+  .miiro-section__grid,
+  .miiro-final__grid,
+  .jiye-brief__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--responsive-gap);
+  }
+
+  .basic-projects__grid--stable {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ===== Mobile: < 768px ===== */
+@media (max-width: 767px) {
+  :root {
+    --responsive-page-pad: 16px;
+    --responsive-gap: 16px;
+    --page-x: 16px;
+  }
+
+  .container,
+  .basic-home__container,
+  .profile-page__container,
+  .workflow-page__container {
+    width: calc(100% - 32px);
+  }
+
+  .site-nav {
+    min-height: 96px;
+    padding-right: var(--responsive-page-pad);
+    padding-left: var(--responsive-page-pad);
+  }
+
+  .basic-hero,
+  .basic-section,
+  .basic-profile,
+  .basic-projects,
+  .basic-strengths,
+  .basic-contact,
+  .page-shell,
+  .profile-page,
+  .workflow-page,
+  .resume-page,
+  .miiro-section,
+  .miiro-user-research,
+  .jiye-brief,
+  .kuro-plate {
+    padding-right: var(--responsive-page-pad);
+    padding-left: var(--responsive-page-pad);
+  }
+
+  .basic-profile__grid,
+  .basic-projects__grid,
+  .basic-strengths__grid,
+  .basic-stats,
+  .project-list,
+  .page-project-list,
+  .project-card,
+  .profile-page__timeline,
+  .resume-page__path,
+  .resume-page__highlights,
+  .workflow-page__flow,
+  .contact-list,
+  .miiro-hero__grid,
+  .miiro-section__grid,
+  .miiro-final__grid,
+  .miiro-persona-card,
+  .jiye-brief__grid,
+  .jiye-brief__facts,
+  .kuro-plate__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--responsive-gap);
+  }
+
+  .basic-projects__grid--stable {
+    grid-template-columns: 1fr;
+  }
+
+  .basic-section__head,
+  .basic-projects > .basic-home__container > .basic-section__head,
+  .basic-strengths > .basic-home__container > .basic-section__head {
+    align-items: center;
+    text-align: center;
+  }
+
+  .basic-project-card,
+  .basic-project-card img,
+  .project-card,
+  .project-card__media,
+  .miiro-media,
+  .miiro-persona-sketch--image {
+    min-height: 0;
+  }
+
+  .basic-project-card {
+    aspect-ratio: 4 / 5;
+  }
+
+  .contact-popover__panel {
+    max-width: calc(100vw - 32px);
+  }
+}
