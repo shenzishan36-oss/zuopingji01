@@ -37,6 +37,8 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build
+        env:
+          BASE_PATH: /zuopingji01/
         run: pnpm run build
 
       - name: Add SPA fallback
