@@ -7,7 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "assets:mobile": "node scripts/generate-mobile-assets.mjs",
     "build": "vite build && node scripts/create-static-routes.mjs",
-    "build:cloudflare": "vite build && node scripts/create-static-routes.mjs && node scripts/prepare-cloudflare-dist.mjs",
+    "build:cloudflare": "vite build && node scripts/create-static-routes.mjs && node scripts/prepare-cloudflare-dist.mjs && node scripts/optimize-cloudflare-assets.mjs",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
